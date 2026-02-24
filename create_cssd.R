@@ -1,7 +1,7 @@
 library(nanoparquet)
 
 # Select domains
-DOMAINS <- c("demographics", "household")
+DOMAINS <- read_lines("domains.txt")
 
 # create the basic demographics file
 source("01_demographics.R")

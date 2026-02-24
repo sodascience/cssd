@@ -12,6 +12,12 @@ Install R and the following packages:
 install.packages(c("tidyverse", "haven", "nanoparquet"))
 ``` 
 
+## Usage
+
+1. Edit the [`domains.txt`](domains.txt) file with the desired domains
+2. Open the [`cssd.Rproj`](cssd.Rproj) file in RStudio
+3. Run the file [`create_cssd.R`](create_cssd.R)
+
 ## Domains available:
 - Demographics
 - Household & Family
