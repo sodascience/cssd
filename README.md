@@ -2,6 +2,8 @@
 
 Code to create the core social science dataset (CSSD) which captures different social domains in a single table per person-year.
 
+![cssd example table](img/table.png)
+
 ## Installation
 
 Install R and the following packages: 
