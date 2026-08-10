@@ -1,18 +1,39 @@
 library(nanoparquet)
+library(readr)
+library(yaml)
+library(haven)
 
-# Select domains
-DOMAINS <- read_lines("domains.txt")
+# read configs
+tables <- read_yaml("tableConfig.yaml")
+files <- read_yaml("fileConfig.yaml")
 
-# create the basic demographics file
-source("01_demographics.R")
-if ("household" %in% DOMAINS) source("02_household.R")
+data <- NULL
 
-cssd <- read_rds("processed_data/person_id.rds")
-for (domain in DOMAINS) {
-  path <- file.path("processed_data", paste0(domain, ".rds"))
-  cssd <- left_join(cssd, read_rds(path), by = join_by(RINPERSOON, RINPERSOONS))
+for(table in tables$tables) {
+  tableName <- table$name
+  print(tableName)
+  tablePaths <- files[[tableName]]
+  print(tablePaths)
+  
+  cols <- table$cols
+  print(cols)
+  
+  joins <- table$joins
+  print(joins)
+  
+  for(path in tablePaths){
+    new <- read_sav(path, col_select = all_of(cols))
+    if(is.null(data)){
+      data <- new
+    }
+    else{
+      data <- left_join(data, new, by = joins)
+    }
+  }
 }
 
+
+
 # write in various formats
-write_parquet(cssd, "processed_data/cssd.parquet")
-write_rds(cssd, "processed_data/cssd.rds")
+write_parquet(data, "processed_data/data.parquet")
+write_rds(data, "processed_data/data.rds")

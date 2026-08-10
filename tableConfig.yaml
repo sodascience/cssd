@@ -1,0 +1,40 @@
+tables:
+  - name: "GBAPERSOONTAB"
+    cols:
+      - RINPERSOON
+      - RINPERSOONS
+      - GBAGESLACHT
+      - GBAGEBOORTEJAAR
+      - GBAHERKOMSTLAND
+      - GBAGEBOORTELANDMOEDER
+      - GBAGEBOORTELANDVADER
+
+  - name: "HOOGSTEOPLJJJJTABVV"
+    cols:
+      - RINPERSOON
+      - RINPERSOONS
+      - OPLNIVSOI2016AGG4HBMETNIRWO
+    joins:
+      - RINPERSOON
+      - RINPERSOONS
+
+  - name: "GBAHUISHOUDENSBUS"
+    cols:
+      - AANTALPERSSH
+      - TYPHH
+      - RINPERSOON
+      - RINPERSOONS
+    joins:
+      - RINPERSOON
+      - RINPERSOONS
+
+  - name: "BAANKENMERKENBUS"
+    cols:
+      - ARBEIDSRELATIEBAANID
+      - SOORTBAANID
+      - SECTBAANID
+      - RINPERSOON
+      - RINPERSOONS
+    joins:
+      - RINPERSOON
+      - RINPERSOONS
