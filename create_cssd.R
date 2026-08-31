@@ -11,15 +11,11 @@ data <- NULL
 
 for(table in tables$tables) {
   tableName <- table$name
-  print(tableName)
   tablePaths <- files[[tableName]]
-  print(tablePaths)
   
   cols <- table$cols
-  print(cols)
-  
+
   joins <- table$joins
-  print(joins)
   
   for(path in tablePaths){
     new <- read_sav(path, col_select = all_of(cols))
