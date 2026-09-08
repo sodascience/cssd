@@ -2,20 +2,21 @@ library(nanoparquet)
 library(readr)
 library(yaml)
 library(haven)
+library(dplyr)
 
 # read configs
-tables <- read_yaml("tableConfig.yaml")
-files <- read_yaml("fileConfig.yaml")
+tables <- read_yaml("tablesConfig.yaml")
+joinses <- read_yaml("joinsConfig.yaml")
 
 data <- NULL
 
 for(table in tables$tables) {
   tableName <- table$name
-  tablePaths <- files[[tableName]]
+  tablePaths <- table$path_sav
   
   cols <- table$cols
 
-  joins <- table$joins
+  joins <- joinses$tableName
   
   for(path in tablePaths){
     new <- read_sav(path, col_select = all_of(cols))

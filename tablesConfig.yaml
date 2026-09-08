@@ -1,5 +1,6 @@
 tables:
   - name: "GBAPERSOONTAB"
+    path_sav: "/Users/max/Documents/SoDa/GitHub/cssd/GBAPERSOONTAB.sav"
     cols:
       - RINPERSOON
       - RINPERSOONS
@@ -10,31 +11,27 @@ tables:
       - GBAGEBOORTELANDVADER
 
   - name: "HOOGSTEOPLJJJJTABVV"
+    path_sav: "/Users/max/Documents/SoDa/GitHub/cssd/HOOGSTEOPLJJJJTABVV2.sav"
     cols:
       - RINPERSOON
       - RINPERSOONS
       - OPLNIVSOI2016AGG4HBMETNIRWO
-    joins:
-      - RINPERSOON
-      - RINPERSOONS
 
   - name: "GBAHUISHOUDENSBUS"
+    path_sav: "/Users/max/Documents/SoDa/GitHub/cssd/GBAHUISHOUDENSBUS.sav"
     cols:
       - AANTALPERSSH
       - TYPHH
       - RINPERSOON
       - RINPERSOONS
-    joins:
-      - RINPERSOON
-      - RINPERSOONS
 
   - name: "BAANKENMERKENBUS"
+    path_sav: "/Users/max/Documents/SoDa/GitHub/cssd/BAANKENMERKENBUS.sav"
     cols:
       - ARBEIDSRELATIEBAANID
       - SOORTBAANID
       - SECTBAANID
       - RINPERSOON
       - RINPERSOONS
-    joins:
-      - RINPERSOON
-      - RINPERSOONS
+
+
