@@ -50,3 +50,4 @@ rsconnect/
 
 # Test data files
 /*.sav
+.Rproj.user
