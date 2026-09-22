@@ -1,6 +1,6 @@
 Package: CSSD
 Title: Dataset Creator for CBS Microdata
-Version: 0.0.0.9000
+Version: 0.0.1.0
 Authors@R: 
     person("Max", "Maes", , "maxmaes2004@gmail.com", role = c("aut", "cre"))
 Description: Simplifies the process of working with CBS (Centraal Bureau voor Statistiek) 
