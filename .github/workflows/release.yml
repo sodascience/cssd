@@ -25,7 +25,7 @@ jobs:
 
       - name: Build Source Package
         run: |
-          Rscript -e 'build_path <- devtools::build(); cat(paste0("PKG_PATH=", build_path), file = sys.getenv("GITHUB_ENV"))'
+          Rscript -e 'build_path <- devtools::build(); cat(paste0("PKG_PATH=", build_path), file = Sys.getenv("GITHUB_ENV"))'
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
