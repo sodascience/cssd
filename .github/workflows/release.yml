@@ -1,0 +1,26 @@
+name: Build and Upload Package Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+
+      - name: Build Source Package
+        run: |
+          Rscript -e 'build_path <- devtools::build(); cat(paste0("PKG_PATH=", build_path), file = sys.getenv("GITHUB_ENV"))'
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.PKG_PATH }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

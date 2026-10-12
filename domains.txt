@@ -1,4 +1,0 @@
-demographics
-household
-education
-occupation

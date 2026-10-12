@@ -1,0 +1,20 @@
+Package: CSSD
+Title: Dataset Creator for CBS Microdata
+Version: 0.0.1.0
+Authors@R: 
+    person("Max", "Maes", , "maxmaes2004@gmail.com", role = c("aut", "cre"))
+Description: Simplifies the process of working with CBS (Centraal Bureau voor Statistiek) 
+    microdata by providing a prepackaged core dataset which (mostly) conforms to the 
+    EU Standardised key social variables as well as some utility functions.
+License: MIT + file LICENSE
+Config/roxygen2/version: 8.1.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports: 
+    arrow,
+    dplyr,
+    haven,
+    magrittr,
+    tidyr,
+    tidyselect,
+    yaml
