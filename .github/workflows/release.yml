@@ -1,8 +1,14 @@
 name: Build and Upload Package Release
 
 on:
+  push:
+    tags:
+      - 'v*'
   release:
     types: [published]
+
+permissions:
+  contents: write
 
 jobs:
   build-release:
@@ -22,5 +28,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ${{ env.PKG_PATH }}
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
