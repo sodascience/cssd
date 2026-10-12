@@ -97,3 +97,4 @@ init_fake_cbs <- function() {
   attr(baankenmerkenbus$EINDEBAANID, "label")          <- "Einddatum baan"
 
   haven::write_sav(baankenmerkenbus, "BAANKENMERKENBUS.sav")
+}

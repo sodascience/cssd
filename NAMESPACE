@@ -5,13 +5,16 @@ export(init_fake_cbs)
 export(inject_yamls)
 importFrom(arrow,write_parquet)
 importFrom(dplyr,
+  filter,
   left_join,
-  mutate
+  mutate,
+  select
 )
 importFrom(haven,
   read_sav,
   write_sav
 )
-importFrom(readr,write_rds)
+importFrom(magrittr,"%>%")
+importFrom(tidyr,unnest)
 importFrom(tidyselect,all_of)
 importFrom(yaml,read_yaml)

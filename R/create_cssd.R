@@ -14,6 +14,7 @@
 #' @importFrom dplyr left_join mutate filter select
 #' @importFrom arrow write_parquet
 #' @importFrom tidyr unnest
+#' @importFrom magrittr %>%
 
 #' @export
 create_cssd <- function(){
@@ -57,7 +58,6 @@ create_cssd <- function(){
 
 
   write_parquet(data, "processed_data/data.parquet")
-  write_rds(data, "processed_data/data.rds")
 }
 
 cbs_can_read <- function(path) {
