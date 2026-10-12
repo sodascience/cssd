@@ -8,6 +8,8 @@
 
 #' @importFrom haven write_sav
 
+
+#' @export
 init_fake_cbs <- function() {
   # Shared keys to enable cross-table joining
   rinpersoon <- c("100000001", "100000002", "100000003", "100000004", "100000005")
@@ -75,19 +77,23 @@ init_fake_cbs <- function() {
   # 4. BAANKENMERKENBUS
   # ------------------------------------------------------------------------------
   baankenmerkenbus <- data.frame(
-    RINPERSOON = rinpersoon,
-    RINPERSOONS = rinpersoons,
     ARBEIDSRELATIEBAANID = c(1, 1, 2, 1, 1),
-    SOORTBAANID = c(1, 1, 2, 1, 1),
-    SECTBAANID = c("01", "02", "01", "03", "02"),
-    stringsAsFactors = FALSE
+    SOORTBAANID          = c(1, 1, 2, 1, 1),
+    SECTBAANID           = c("01", "02", "01", "03", "02"),
+    RINPERSOON           = rinpersoon,
+    RINPERSOONS          = rinpersoons,
+    DATUMAANVANGBAANID   = as.Date(c("2018-01-01", "2019-05-15", "2020-03-01", "2017-11-01", "2021-01-01")),
+    EINDEBAANID          = as.Date(c("2019-12-31", "2021-06-30", NA,           "2020-01-01", NA)),
+    stringsAsFactors     = FALSE
   )
 
-  attr(baankenmerkenbus$RINPERSOON, "label") <- "Persoonsidentificator"
-  attr(baankenmerkenbus$RINPERSOONS, "label") <- "Sleuteltype persoonsidentificator"
+  # Apply SPM/CBS labels
   attr(baankenmerkenbus$ARBEIDSRELATIEBAANID, "label") <- "Arbeidsrelatie baan"
-  attr(baankenmerkenbus$SOORTBAANID, "label") <- "Soort baan"
-  attr(baankenmerkenbus$SECTBAANID, "label") <- "Sector baan"
+  attr(baankenmerkenbus$SOORTBAANID, "label")          <- "Soort baan"
+  attr(baankenmerkenbus$SECTBAANID, "label")           <- "Sector baan"
+  attr(baankenmerkenbus$RINPERSOON, "label")           <- "Persoonsidentificator"
+  attr(baankenmerkenbus$RINPERSOONS, "label")          <- "Sleuteltype persoonsidentificator"
+  attr(baankenmerkenbus$DATUMAANVANGBAANID, "label")   <- "Aanvangsdatum baan"
+  attr(baankenmerkenbus$EINDEBAANID, "label")          <- "Einddatum baan"
 
-  write_sav(baankenmerkenbus, "BAANKENMERKENBUS.sav")
-}
+  haven::write_sav(baankenmerkenbus, "BAANKENMERKENBUS.sav")

@@ -11,11 +11,11 @@
 #' @importFrom yaml read_yaml
 #' @importFrom haven read_sav
 #' @importFrom tidyselect all_of
-#' @importFrom dplyr left_join
+#' @importFrom dplyr left_join mutate filter select
 #' @importFrom arrow write_parquet
-#' @importFrom readr write_rds
+#' @importFrom tidyr unnest
 
-
+#' @export
 create_cssd <- function(){
 
 
@@ -23,27 +23,96 @@ create_cssd <- function(){
   joinses <- read_yaml("joinsConfig.yaml")
 
   data <- NULL
-
+  firstRun <- TRUE
   for(table in tables$tables) {
     tableName <- table$name
     tablePaths <- table$path_sav
 
+    startKey <- table$startKey
+    endKey <- table$endKey
     cols <- table$cols
-
     joins <- joinses$tableName
 
     for(path in tablePaths){
+      if(!cbs_can_read(path)){
+        print("unable to access table: %s with path: %s", tableName, path)
+        next
+      }
+      year = names(path)
+      path = cbs_update_path(path)
       new <- read_sav(path, col_select = all_of(cols))
+      new <- verticalizer(new, year, startKey, endKey)
+
       if(is.null(data)){
         data <- new
-      }
-      else{
+      }else if(firstRun){
+        data <- rbind(data, new)
+      }else{
+        joins <- c("year")
         data <- left_join(data, new, by = joins)
       }
     }
+    firstRun = FALSE
   }
 
 
   write_parquet(data, "processed_data/data.parquet")
   write_rds(data, "processed_data/data.rds")
+}
+
+cbs_can_read <- function(path) {
+  con <- try(suppressWarnings(file(path, "rb")), silent = TRUE)
+  if (inherits(con, "try-error")) return(FALSE)
+  on.exit(close(con))
+  identical(summary(con)[["can read"]], "yes")
+}
+
+verticalizer <- function(new, year, startKey, endKey) {
+  if (!is.null(startKey)) {
+    busToTab(new, startKey, endKey)
+  } else {
+    mutate(new, year = year)
+  }
+
+}
+
+busToTab <- function(new, startKey, endKey) {
+  # Standardize date conversion for dynamic column names
+  new[[startKey]] <- as.Date(new[[startKey]])
+  new[[endKey]]   <- as.Date(new[[endKey]])
+
+  # Calculate min/max years spanning the entire dataset
+  min_year <- min(as.integer(format(new[[startKey]], "%Y")), na.rm = TRUE)
+  max_year <- max(as.integer(format(new[[endKey]], "%Y")), na.rm = TRUE)
+
+  # Create vector of Jan 1st evaluation dates across all relevant years
+  jan1_dates <- as.Date(paste0(min_year:max_year, "-01-01"))
+
+  # Filter events active on each Jan 1st and attach the year column
+  mutate(new, .eval_date = list(jan1_dates)) %>%
+    unnest(.data$.eval_date) %>%
+    filter(
+      .data[[startKey]] <= .data$.eval_date,
+      .data[[endKey]] >= .data$.eval_date
+    ) %>%
+    mutate(
+      year = as.character(format(.data$.eval_date, "%Y"))
+    ) %>%
+    select(-.data$.eval_date)
+}
+
+cbs_update_path <- function(path) {
+  path_clean <- sub("[/\\\\]+$", "", path)
+  parent_dir <- dirname(path_clean)
+  prefix     <- sub("^(.*V)[0-9]+$", "\\1", basename(path_clean))
+
+  siblings <- list.files(parent_dir, pattern = paste0("^", prefix, "([1-9]|10)$"))
+  versions <- as.integer(sub(paste0("^", prefix), "", siblings))
+
+  updated_path <- file.path(parent_dir, siblings[which.max(versions)])
+
+  if (updated_path != path_clean) {
+    message("Updated path from ", basename(path_clean), " to ", basename(updated_path))
+  }
+  return(updated_path)
 }
