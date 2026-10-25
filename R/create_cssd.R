@@ -45,7 +45,7 @@ create_cssd <- function(){
 
       if(is.null(startKey)){
         path = cbs_update_path(path)
-      }
+
       new <- read_sav(path, col_select = all_of(cols))
       new <- verticalizer(new, year, startKey, endKey)
 
@@ -57,12 +57,13 @@ create_cssd <- function(){
         joins <- c(joins, "year")
         data <- left_join(data, new, by = joins)
       }
-    }
+      }
     firstRun = FALSE
+    }
+
+    dir.create("processed_data", showWarnings = FALSE, recursive = TRUE)
+    write_parquet(data, "processed_data/data.parquet")
   }
-
-
-  write_parquet(data, "processed_data/data.parquet")
 }
 
 cbs_can_read <- function(path) {
