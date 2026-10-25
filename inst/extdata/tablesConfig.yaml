@@ -1,7 +1,7 @@
 tables:
   - name: "GBAPERSOONTAB"
     path_sav:
-      2022: "/Users/max/Documents/SoDa/GitHub/cssd/GBAPERSOONTAB.sav"
+      2022: "GBAPERSOONTABV1.sav"
     cols:
       - RINPERSOON
       - RINPERSOONS
@@ -13,7 +13,7 @@ tables:
 
   - name: "HOOGSTEOPLJJJJTABVV"
     path_sav:
-      2022: "/Users/max/Documents/SoDa/GitHub/cssd/HOOGSTEOPLJJJJTABVV2.sav"
+      2022: "HOOGSTEOPLJJJJTABVV2.sav"
     cols:
       - RINPERSOON
       - RINPERSOONS
@@ -23,7 +23,7 @@ tables:
     startKey: "DATUMAANVANGHH"
     endKey: "DATUMEINDEHH"
     path_sav:
-      2022: "/Users/max/Documents/SoDa/GitHub/cssd/GBAHUISHOUDENSBUS.sav"
+      2022: "GBAHUISHOUDENSBUS.sav"
     cols:
       - AANTALPERSSH
       - TYPHH
@@ -36,7 +36,7 @@ tables:
     startKey: "DATUMAANVANGBAANID"
     endKey: "EINDEBAANID"
     path_sav:
-      2022: "/Users/max/Documents/SoDa/GitHub/cssd/BAANKENMERKENBUS.sav"
+      2022: "BAANKENMERKENBUS.sav"
     cols:
       - ARBEIDSRELATIEBAANID
       - SOORTBAANID
