@@ -63,6 +63,8 @@ init_testDB <- function() {
     RINPERSOONS = rinpersoons,
     AANTALPERSSH = c(1, 2, 4, 1, 3),
     TYPHH = c("1100", "2100", "2200", "1100", "2100"),
+    DATUMAANVANGHH = as.Date(c("2020-01-01", "2019-05-15", "2021-03-10", "2018-11-01", "2022-07-01")),
+    DATUMEINDEHH = as.Date(c("2020-12-31", "2021-04-30", "9999-12-31", "2019-10-31", "9999-12-31")),
     stringsAsFactors = FALSE
   )
 
@@ -70,9 +72,10 @@ init_testDB <- function() {
   attr(gbahuishoudensbus$RINPERSOONS, "label") <- "Sleuteltype persoonsidentificator"
   attr(gbahuishoudensbus$AANTALPERSSH, "label") <- "Aantal personen in het huishouden"
   attr(gbahuishoudensbus$TYPHH, "label") <- "Type huishouden"
+  attr(gbahuishoudensbus$DATUMAANVANGHH, "label") <- "Aanvangsdatum huishoudenspositie"
+  attr(gbahuishoudensbus$DATUMEINDEHH, "label") <- "Einddatum huishoudenspositie"
 
-  write_sav(gbahuishoudensbus, "GBAHUISHOUDENSBUS.sav")
-
+  haven::write_sav(gbahuishoudensbus, "GBAHUISHOUDENSBUS.sav")
   # ------------------------------------------------------------------------------
   # 4. BAANKENMERKENBUS
   # ------------------------------------------------------------------------------
