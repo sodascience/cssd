@@ -57,12 +57,13 @@ create_cssd <- function(){
         joins <- c(joins, "year")
         data <- left_join(data, new, by = joins)
       }
-    }
+      }
     firstRun = FALSE
-  }
+    }
 
-  dir.create("processed_data", showWarnings = FALSE, recursive = TRUE)
-  write_parquet(data, "processed_data/data.parquet")
+    dir.create("processed_data", showWarnings = FALSE, recursive = TRUE)
+    write_parquet(data, "processed_data/data.parquet")
+  }
 }
 
 cbs_can_read <- function(path) {
