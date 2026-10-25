@@ -20,8 +20,8 @@
 create_cssd <- function(){
 
 
-  tables <- read_yaml("tablesConfig.yaml")
-  joinses <- read_yaml("joinsConfig.yaml")
+  tables <- read_yaml("config_files/tablesConfig.yaml")
+  joinses <- read_yaml("config_files/joinsConfig.yaml")
 
   data <- NULL
   firstRun <- TRUE
