@@ -20,6 +20,8 @@ tables:
       - OPLNIVSOI2016AGG4HBMETNIRWO
 
   - name: "GBAHUISHOUDENSBUS"
+    startKey: "DATUMAANVANGHH"
+    endKey: "DATUMEINDEHH"
     path_sav:
       2022: "/Users/max/Documents/SoDa/GitHub/cssd/GBAHUISHOUDENSBUS.sav"
     cols:
@@ -27,6 +29,8 @@ tables:
       - TYPHH
       - RINPERSOON
       - RINPERSOONS
+      - DATUMAANVANGHH
+      - DATUMEINDEHH
 
   - name: "BAANKENMERKENBUS"
     startKey: "DATUMAANVANGBAANID"

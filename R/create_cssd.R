@@ -107,10 +107,12 @@ busToTab <- function(new, startKey, endKey) {
 cbs_update_path <- function(path) {
   path_clean <- sub("[/\\\\]+$", "", path)
   parent_dir <- dirname(path_clean)
-  prefix     <- sub("^(.*V)[0-9]+$", "\\1", basename(path_clean))
 
-  siblings <- list.files(parent_dir, pattern = paste0("^", prefix, "([1-9]|10)$"))
-  versions <- as.integer(sub(paste0("^", prefix), "", siblings))
+  no_ext     <- sub("\\.sav$", "", basename(path_clean))
+  prefix     <- sub("^(.*V)[0-9]+$", "\\1", no_ext)
+
+  siblings <- list.files(parent_dir, pattern = paste0("^", prefix, "([1-9]|10)\\.sav$"))
+  versions <- as.integer(sub("\\.sav$", "", sub(paste0("^", prefix), "", siblings)))
 
   updated_path <- file.path(parent_dir, siblings[which.max(versions)])
 
