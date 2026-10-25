@@ -43,7 +43,9 @@ create_cssd <- function(){
         next
       }
 
-      path = cbs_update_path(path)
+      if(is.null(startKey)){
+        path = cbs_update_path(path)
+      }
       new <- read_sav(path, col_select = all_of(cols))
       new <- verticalizer(new, year, startKey, endKey)
 
