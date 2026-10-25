@@ -111,7 +111,7 @@ cbs_update_path <- function(path) {
 
   updated_path <- file.path(parent_dir, siblings[which.max(versions)])
 
-  if (updated_path != path_clean) {
+  if (!identical(updated_path, path_clean)) {
     message("Updated path from ", basename(path_clean), " to ", basename(updated_path))
   }
   return(updated_path)
