@@ -35,11 +35,14 @@ create_cssd <- function(){
     joins <- joinses$tableName
 
     for(year in names(tablePaths)){
+
+      path = tablePaths[[year]]
+
       if(!cbs_can_read(path)){
         print(sprintf("unable to access table: %s with path: %s", tableName, path))
         next
       }
-      path = tablePaths[[year]]
+
       path = cbs_update_path(path)
       new <- read_sav(path, col_select = all_of(cols))
       new <- verticalizer(new, year, startKey, endKey)
