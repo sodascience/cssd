@@ -1,4 +1,4 @@
-#' @title init_fake_cbs
+#' @title init_testDB
 #'
 #' @description Generates a series of .sav files resembling CBS to simulate
 #'  analysis. Data is not representative of anything and should only be used
@@ -10,7 +10,7 @@
 
 
 #' @export
-init_fake_cbs <- function() {
+init_testDB <- function() {
   # Shared keys to enable cross-table joining
   rinpersoon <- c("100000001", "100000002", "100000003", "100000004", "100000005")
   rinpersoons <- c("R", "R", "R", "R", "R")

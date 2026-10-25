@@ -7,7 +7,7 @@
 
 #' @export
 inject_yamls <- function() {
-  extdata_dir <- system.file("extdata", package = "yourPackageName")
+  extdata_dir <- system.file("extdata", package = "CSSD")
   yaml_files <- list.files(extdata_dir, full.names = TRUE)
 
   output_dir <- "config_files"
